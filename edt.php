@@ -58,7 +58,7 @@ foreach($html->find('ul li ul li') as $e) {
         $html2 = str_get_html($e->innertext);
         foreach($html2->find('a') as $f) {
             if (preg_match('/6/',$f->innertext)) {
-                $edt = $e->href;
+                $edt = $f->href;
             }
         }
     }
@@ -83,6 +83,7 @@ $req  = curlget($http, 1);
 $html = str_get_html($req);
 $pdf = $html->find('iframe[name=null]',0)->src;
 echo $pdf."\r\n";
+
 foreach($html->find('table tr td a') as $e) {
     $html2 = str_get_html($e->innertext);
     foreach($html2->find('font') as $f) {
@@ -92,3 +93,9 @@ foreach($html->find('table tr td a') as $e) {
     }
 } 
 echo $edt."\r\n";
+
+$http = $url.$edt;
+$req  = curlget($http, 1);
+$html = str_get_html($req);
+$pdf = $html->find('iframe[name=null]',0)->src;
+echo $pdf."\r\n";
